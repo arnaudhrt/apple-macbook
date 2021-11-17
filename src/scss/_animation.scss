@@ -1,0 +1,8 @@
+.animated-macbook {
+  max-width: 1336px;
+  margin: 0 auto;
+  canvas {
+    width: 100%;
+    aspect-ratio: 1336/786;
+  }
+}

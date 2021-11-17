@@ -2,22 +2,26 @@
   "name": "apple-macbook",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arnaudhrt/apple-macbook.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/arnaudhrt/apple-macbook/issues"
   },
   "homepage": "https://github.com/arnaudhrt/apple-macbook#readme",
   "devDependencies": {
-    "sass": "^1.43.4"
-  }
+    "sass": "^1.43.4",
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "parcel-plugin-asset-copier": "^1.1.0"
+  },
+  "assetsPath": "assets"
 }
