@@ -1,0 +1,56 @@
+@import 'variables';
+
+.hero {
+   .img-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      img {
+         width: 100%;
+         object-fit: cover;
+      }
+   }
+   .text-info {
+      max-width: 1000px;
+      color: $text-color;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 auto;
+      h1 {
+         font-size: 96px;
+         margin-bottom: 10px;
+      }
+      p {
+         max-width: 840px;
+         font-size: 32px;
+         line-height: 37px;
+         margin: 0 auto 40px;
+      }
+      .price {
+         display: block;
+         font-size: 21px;
+         margin-bottom: 35px;
+      }
+      .cto {
+         display: flex;
+         justify-content: center;
+         a {
+            color: $apple-blue;
+            font-size: 21px;
+            line-height: 21px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:first-child {
+               margin-right: 30px;
+            }
+            svg {
+               margin-left: 7px;
+            }
+            &:hover span {
+               text-decoration: underline;
+            }
+         }
+      }
+   }
+}
