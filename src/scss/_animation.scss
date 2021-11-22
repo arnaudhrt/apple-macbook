@@ -1,8 +1,94 @@
 .animated-macbook {
-  max-width: 1336px;
-  margin: 0 auto;
-  canvas {
-    width: 100%;
-    aspect-ratio: 1336/786;
-  }
+   max-width: 1336px;
+   margin: 0 auto;
+   height: 400vh;
+   position: relative;
+   margin-bottom: 300px;
+   canvas {
+      width: 100%;
+      aspect-ratio: 1336/786;
+      position: sticky;
+      top: 90px;
+   }
+}
+
+.figures-wp {
+   position: sticky;
+   top: 90px;
+   width: 100%;
+   aspect-ratio: 1336/786;
+   .figure {
+     position: absolute;
+      .sep {
+         display: block;
+         width: 40px;
+         height: 4px;
+         background: #000;
+         opacity: 0;
+         transform-origin: left;
+         transform: scale(0);
+         transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+      }
+
+      .up-to {
+         display: block;
+         font-weight: 500;
+         line-height: 1.2;
+         font-size: 17px;
+         margin-top: 14px;
+         color: #86868b;
+         transform: translate3d(0, 150%, 0);
+         opacity: 0;
+         transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+      }
+      .label-wp {
+         overflow: hidden;
+         .label {
+            display: flex;
+            align-items: flex-end;
+            .left {
+               color: #1d1d1f;
+               font-size: 100px;
+               font-weight: 600;
+               line-height: 1.05;
+               transform: translate3d(0, 130%, 0);
+               transition: transform 0.4s ease-out;
+            }
+
+            .right {
+               font-weight: 500;
+               font-size: 17px;
+               color: #86868b;
+               margin-left: 12px;
+               margin-bottom: 12px;
+               max-width: 105px;
+               transform: translate3d(0, 130%, 0);
+               transition: transform 0.4s ease-out;
+            }
+         }
+      }
+      &:hover,
+      &.active {
+         .sep {
+            opacity: 1;
+            transform: scale(1);
+         }
+         .up-to {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+         }
+         .label-wp {
+            .label {
+               .left {
+                  transition: transform 0.4s ease-out 200ms;
+                  transform: translate3d(0, 0, 0);
+               }
+               .right {
+                  transition: transform 0.4s ease-out 350ms;
+                  transform: translate3d(0, 0, 0);
+               }
+            }
+         }
+      }
+   }
 }

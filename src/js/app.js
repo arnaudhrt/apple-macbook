@@ -1,6 +1,15 @@
+import { mapRange } from './utils'
+
 const canvas = document.querySelector('canvas')
 const ctx = canvas.getContext('2d')
 const img = new Image()
+const sectionAnimationScroll = document.querySelector('.animated-macbook')
+const images = preloadImages()
+const figures = document.querySelectorAll('.figure')
+
+let currentFrameIndex = 0
+let lastFrame = 0
+let counter = 0
 
 img.src = 'animation_images/large_0000.jpg'
 img.onload = function () {
@@ -13,11 +22,17 @@ function onResize() {
    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
 }
 
+function onScroll() {
+   const rect = sectionAnimationScroll.getBoundingClientRect()
+   const percentScroll = 100 - ((rect.top + rect.height - window.innerHeight) / (rect.height - window.innerHeight)) * 100
+   currentFrameIndex = Math.round(mapRange(0, 80, 0, 86, percentScroll))
+   figures.forEach((el) => {
+      el.classList.toggle('active', percentScroll > 80)
+   })
+}
+
 window.addEventListener('resize', onResize)
-
-onResize()
-
-let counter = 0
+window.addEventListener('scroll', onScroll)
 
 function preloadImage(url) {
    const img = new Image()
@@ -29,7 +44,7 @@ function preloadImage(url) {
 }
 
 function preloadImages() {
-  const images = []
+   const images = []
    for (let i = 0; i < 86; i++) {
       if (i < 10) {
          images[i] = preloadImage(`animation_images/large_000${i}.jpg`)
@@ -40,46 +55,13 @@ function preloadImages() {
    return images
 }
 
-const images = preloadImages()
-
-let stop = false
-let frameCount = 0
-let fps, fpsInterval, startTime, now, then, elapsed
-let currentImage = 0
-
-// initialize the timer variables and start the animation
-
-function startAnimating(fps) {
-   fpsInterval = 1000 / fps
-   then = Date.now()
-   startTime = then
-   animate()
-}
-
-// the animation loop calculates time elapsed since the last loop
-// and only draws if your specified fps interval is achieved
-
 function animate() {
-   // request another frame
-
    requestAnimationFrame(animate)
-
-   // calc elapsed time since last loop
-
-   now = Date.now()
-   elapsed = now - then
-
-   // if enough time has elapsed, draw the next frame
-
-   if (elapsed > fpsInterval) {
-      // Get ready for next frame by setting then=now, but also adjust for your
-      // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
-      then = now - (elapsed % fpsInterval)
-
-
-      ctx.drawImage(images[currentImage++ % 86], 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
-      // Put your drawing code here
+   if (lastFrame != currentFrameIndex && currentFrameIndex >= 0 && currentFrameIndex <= 86) {
+      ctx.drawImage(images[currentFrameIndex], 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
+      lastFrame = currentFrameIndex
    }
 }
 
-startAnimating(24)
+onResize()
+requestAnimationFrame(animate)
