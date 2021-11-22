@@ -1,9 +1,9 @@
 .animated-macbook {
    max-width: 1336px;
    margin: 0 auto;
-   height: 400vh;
+   height: 350vh;
    position: relative;
-   margin-bottom: 300px;
+   margin-bottom: 200px;
    canvas {
       width: 100%;
       aspect-ratio: 1336/786;
@@ -91,4 +91,23 @@
          }
       }
    }
+}
+
+.animated-macbook-closed {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  .left-side {
+    position: relative;
+    left: -15%;
+    display: block;
+    margin-right: 75px;
+  }
+  .right-side {
+    position: relative;
+    right: -15%;
+    display: block;
+    margin-left: 75px;
+  }
 }

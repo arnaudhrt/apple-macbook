@@ -10,6 +10,8 @@ const figures = document.querySelectorAll('.figure')
 let currentFrameIndex = 0
 let lastFrame = 0
 let counter = 0
+let currentPercentScroll = 0
+let nextPercentScroll = 0
 
 img.src = 'animation_images/large_0000.jpg'
 img.onload = function () {
@@ -24,10 +26,10 @@ function onResize() {
 
 function onScroll() {
    const rect = sectionAnimationScroll.getBoundingClientRect()
-   const percentScroll = 100 - ((rect.top + rect.height - window.innerHeight) / (rect.height - window.innerHeight)) * 100
-   currentFrameIndex = Math.round(mapRange(0, 80, 0, 86, percentScroll))
+   nextPercentScroll = 100 - ((rect.top + rect.height - window.innerHeight) / (rect.height - window.innerHeight)) * 100
+
    figures.forEach((el) => {
-      el.classList.toggle('active', percentScroll > 80)
+      el.classList.toggle('active', nextPercentScroll > 80)
    })
 }
 
@@ -37,9 +39,6 @@ window.addEventListener('scroll', onScroll)
 function preloadImage(url) {
    const img = new Image()
    img.src = url
-   img.onload = () => {
-      console.log(counter++)
-   }
    return img
 }
 
@@ -57,6 +56,10 @@ function preloadImages() {
 
 function animate() {
    requestAnimationFrame(animate)
+
+   currentPercentScroll = lerp(currentPercentScroll, nextPercentScroll, 0.08)
+   currentFrameIndex = Math.round(mapRange(0, 80, 0, 86, currentPercentScroll))
+
    if (lastFrame != currentFrameIndex && currentFrameIndex >= 0 && currentFrameIndex <= 86) {
       ctx.drawImage(images[currentFrameIndex], 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
       lastFrame = currentFrameIndex
@@ -65,3 +68,28 @@ function animate() {
 
 onResize()
 requestAnimationFrame(animate)
+
+const lerp = (current, next, amount) => {
+   amount = amount < 0 ? 0 : amount
+   amount = amount > 1 ? 1 : amount
+   return current + (next - current) * amount
+}
+
+// Animation Macbook closed
+
+const macbookClosedWrapper = document.querySelector('.animated-macbook-closed')
+const leftSide = document.querySelector('.left-side')
+const rightSide = document.querySelector('.right-side')
+
+window.addEventListener('scroll', (e) => {
+   const rect = macbookClosedWrapper.getBoundingClientRect()
+   let scrollPos = Math.round(((window.innerHeight - rect.top) / window.innerHeight) * 100) -15
+   console.log(scrollPos)
+   if (scrollPos > -15 && scrollPos < 0) {
+      leftSide.style.left = `${scrollPos-3}%`
+      rightSide.style.right = `${scrollPos-3}%`
+   } else if (scrollPos >= 0) {
+      leftSide.style.left = `0%`
+      rightSide.style.right = `0%`
+   }
+})
