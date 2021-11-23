@@ -18,7 +18,7 @@
    width: 100%;
    aspect-ratio: 1336/786;
    .figure {
-     position: absolute;
+      position: absolute;
       .sep {
          display: block;
          width: 40px;
@@ -67,7 +67,6 @@
             }
          }
       }
-      &:hover,
       &.active {
          .sep {
             opacity: 1;
@@ -94,20 +93,21 @@
 }
 
 .animated-macbook-closed {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  .left-side {
-    position: relative;
-    left: -15%;
-    display: block;
-    margin-right: 75px;
-  }
-  .right-side {
-    position: relative;
-    right: -15%;
-    display: block;
-    margin-left: 75px;
-  }
+   width: 100%;
+   overflow: hidden;
+   display: flex;
+   justify-content: center;
+   padding-bottom: 214px;
+   .left-side {
+      position: relative;
+      left: -275px;
+      display: block;
+      margin-right: 75px;
+   }
+   .right-side {
+      position: relative;
+      right: -275px;
+      display: block;
+      margin-left: 75px;
+   }
 }

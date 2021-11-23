@@ -83,13 +83,16 @@ const rightSide = document.querySelector('.right-side')
 
 window.addEventListener('scroll', (e) => {
    const rect = macbookClosedWrapper.getBoundingClientRect()
-   let scrollPos = Math.round(((window.innerHeight - rect.top) / window.innerHeight) * 100) -15
-   console.log(scrollPos)
-   if (scrollPos > -15 && scrollPos < 0) {
-      leftSide.style.left = `${scrollPos-3}%`
-      rightSide.style.right = `${scrollPos-3}%`
-   } else if (scrollPos >= 0) {
+   // let scrollPos = Math.round(((window.innerHeight - rect.top) / window.innerHeight) * 100) - 250
+   let scrollPos = Math.round(rect.bottom - innerHeight)
+   let neg =- scrollPos
+   console.log(neg)
+   if (neg > -275 && neg < 0 ) {
+      leftSide.style.left = `${neg}px`
+      rightSide.style.right = `${neg}px`
+   } else if (neg >= 0) {
       leftSide.style.left = `0%`
       rightSide.style.right = `0%`
    }
 })
+
