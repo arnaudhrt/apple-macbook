@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/arnaudhrt/apple-macbook#readme",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.1",
     "sass": "^1.43.4"
   },
   "dependencies": {
